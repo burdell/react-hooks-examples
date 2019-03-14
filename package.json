@@ -1,0 +1,61 @@
+{
+  "name": "react-hooks",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "watchTests": "jest --watchAll",
+    "start": "parcel src/index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@emotion/core": "^10.0.7",
+    "@emotion/styled": "^10.0.7",
+    "@reach/router": "^1.2.1",
+    "react": "^16.8.4",
+    "react-dom": "^16.8.4",
+    "react-emotion": "^10.0.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.9",
+    "@types/reach__router": "^1.2.3",
+    "@types/react": "^16.8.7",
+    "@types/react-dom": "^16.8.2",
+    "babel-jest": "^24.5.0",
+    "jest": "^24.3.1",
+    "jest-dom": "^3.1.2",
+    "jest-environment-jsdom-global": "^1.2.0",
+    "jsdom": "^14.0.0",
+    "parcel-bundler": "^1.12.0",
+    "react-testing-library": "^6.0.0",
+    "ts-jest": "^24.0.0",
+    "typescript": "^3.3.3333"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "ts-jest"
+    },
+    "globals": {
+      "jsdom": true
+    },
+    "testRegex": "(/__tests__/.*|\\.*(test))\\.(ts|tsx)$",
+    "testPathIgnorePatterns": [
+      "\\.snap$",
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/.cache/"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/test-setup.ts"
+    ],
+    "testEnvironment": "jest-environment-jsdom-global"
+  }
+}

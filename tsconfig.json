@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "outDir": "/dist",
+    "strict": true,
+    "module": "es2015",
+    "target": "es2015",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": true,
+    "jsx": "react",
+    "moduleResolution": "node",
+    "types": ["jest", "node"]
+  },
+  "exclude": ["node_modules"],
+  "include": ["./src/**/*.ts", "./src/**/*.tsx"]
+}
