@@ -1,6 +1,16 @@
 import React from 'React'
 import { RouteComponentProps } from '@reach/router'
 
-import { UseState } from './class'
+import { Switcher } from '../utils/Switcher'
 
-export const UseStateRoute = (_: RouteComponentProps) => <UseState />
+import { UseState as ClassComp } from './class'
+import { UseState as HookComp } from './hook'
+
+export const UseStateRoute = (_: RouteComponentProps) => (
+  <Switcher
+    switches={[
+      { name: 'Basic Hook', component: <HookComp /> },
+      { name: 'Basic Class', component: <ClassComp /> }
+    ]}
+  />
+)
