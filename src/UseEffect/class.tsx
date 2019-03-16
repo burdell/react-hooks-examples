@@ -1,57 +1,136 @@
 import React, { Component } from 'react'
 
-import { Chord } from './Chord'
+import { Option, NoteRow } from './styles'
+import { Chord, AvailableChords, ChordType } from './Chord'
+
+const keyboardEvents = {
+  Space: 32,
+  Up: 38,
+  Down: 40,
+  m: 77,
+  chords: [65, 66, 67, 68, 69, 70, 71]
+}
 
 interface State {
   playing: boolean
   chord: Chord
-  mood: 'major' | 'minor' | 'seventh'
+  currentChord: string
+  chordType: ChordType
 }
 
 export class UseEffect extends Component<{}, Readonly<State>> {
   public state: State = {
     playing: false,
-    chord: new Chord(),
-    mood: 'major'
+    chord: new Chord('C', 'major'),
+    currentChord: 'C',
+    chordType: 'major'
   }
 
-  componentDidUpdate(prevProps: {}, prevState: State) {
-    const { playing, chord, mood } = this.state
+  componentDidUpdate(_: {}, prevState: State) {
+    const { playing, chord, currentChord, chordType } = this.state
+
     if (!prevState.playing && playing) {
       chord.play()
     }
-
     if (prevState.playing && !playing) {
       chord.stop()
     }
+    if (currentChord && prevState.currentChord !== currentChord) {
+      chord.changeChord(currentChord, this.state.chordType)
+    }
 
-    if (prevState.mood !== mood) {
-      chord.setMood(mood)
+    if (chordType && prevState.chordType !== chordType) {
+      chord.changeChord(currentChord, chordType)
     }
   }
 
+  componentDidMount() {
+    document.addEventListener('keydown', this.handleKeyEvent)
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('keydown', this.handleKeyEvent)
+    this.state.chord.stop()
+  }
+
   render() {
-    const { playing } = this.state
     return (
       <div>
-        <div>
-          <input
-            type="range"
-            min="-100"
-            max="100"
-            defaultValue="0"
-            onChange={e => console.log(e.target.value)}
-          />
-        </div>
-        <div>
-          <div onClick={() => this.setState({ mood: 'major' })}>😄</div>
-          <div onClick={() => this.setState({ mood: 'minor' })}>😢</div>
-          <div onClick={() => this.setState({ mood: 'seventh' })}>🤗</div>
-        </div>
-        <button onClick={() => this.setState({ playing: !playing })}>
-          {playing ? 'Stop' : 'Start'}
+        <NoteRow>
+          <Option
+            onClick={() => this.setType('major')}
+            selected={this.state.chordType === 'major'}
+          >
+            😊
+          </Option>
+          <Option
+            onClick={() => this.setType('minor')}
+            selected={this.state.chordType === 'minor'}
+          >
+            😢
+          </Option>
+        </NoteRow>
+        <NoteRow>
+          {AvailableChords.map(chord => (
+            <Option
+              selected={this.state.currentChord === chord}
+              key={chord}
+              onClick={() => this.setCurrentChord(chord)}
+            >
+              {chord}
+            </Option>
+          ))}
+        </NoteRow>
+        <button onClick={() => this.togglePlaying()}>
+          {this.state.playing ? 'Stop' : 'Start'}
         </button>
       </div>
     )
+  }
+
+  handleKeyEvent = (event: KeyboardEvent) => {
+    const { which, key } = event
+    if (keyboardEvents.chords.includes(which)) {
+      this.setCurrentChord(key.toUpperCase())
+    } else {
+      switch (which) {
+        case keyboardEvents.Space:
+          this.togglePlaying()
+          return
+        case keyboardEvents.m:
+          this.toggleType()
+          return
+        case keyboardEvents.Down:
+          this.moveChord(-1)
+          return
+        case keyboardEvents.Up:
+          this.moveChord(1)
+          return
+        default:
+          return
+      }
+    }
+  }
+
+  setType = (chordType: ChordType) => this.setState({ chordType })
+
+  toggleType = () => {
+    if (this.state.chordType === 'major') {
+      this.setState({ chordType: 'minor' })
+    } else {
+      this.setState({ chordType: 'major' })
+    }
+  }
+
+  setCurrentChord = (chord: string) => this.setState({ currentChord: chord })
+
+  togglePlaying = () => this.setState({ playing: !this.state.playing })
+
+  moveChord = (steps: number) => {
+    const currentChordIndex = AvailableChords.indexOf(this.state.currentChord)
+    let newIndex = (currentChordIndex + steps) % AvailableChords.length
+    if (newIndex < 0) newIndex = AvailableChords.length - 1
+
+    this.setCurrentChord(AvailableChords[newIndex])
   }
 }
