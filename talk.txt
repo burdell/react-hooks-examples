@@ -3,3 +3,8 @@
 
 setState
   -  using function
+
+useEffect
+  - replaces lifecycle hooks
+  - return function for cleanup
+  - inputs

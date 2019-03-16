@@ -18,7 +18,6 @@ describe('Switcher', () => {
       />
     )
 
-    const view1Button = getByText('View 1')
     const view2Button = getByText('View 2')
     const view3Button = getByText('View 3')
 
@@ -28,23 +27,11 @@ describe('Switcher', () => {
 
     view2Button.click()
 
-    getByText("I'm View 1")
+    expect(queryByText("I'm View 1")).toBeNull()
     getByText("I'm View 2")
     expect(queryByText("I'm View 3")).toBeNull()
 
     view3Button.click()
-
-    getByText("I'm View 1")
-    getByText("I'm View 2")
-    getByText("I'm View 3")
-
-    view2Button.click()
-
-    getByText("I'm View 1")
-    expect(queryByText("I'm View 2")).toBeNull()
-    getByText("I'm View 3")
-
-    view1Button.click()
 
     expect(queryByText("I'm View 1")).toBeNull()
     expect(queryByText("I'm View 2")).toBeNull()

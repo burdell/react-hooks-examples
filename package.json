@@ -20,11 +20,15 @@
     "react-emotion": "^10.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-runtime": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
     "@types/jest": "^24.0.9",
     "@types/reach__router": "^1.2.3",
     "@types/react": "^16.8.7",
     "@types/react-dom": "^16.8.2",
     "babel-jest": "^24.5.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
     "jest": "^24.3.1",
     "jest-dom": "^3.1.2",
     "jest-environment-jsdom-global": "^1.2.0",

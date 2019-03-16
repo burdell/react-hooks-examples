@@ -1,8 +1,13 @@
 import React from 'react'
 import { Link, RouteComponentProps } from '@reach/router'
 
-export const Home = (props: RouteComponentProps) => (
+export const Home = (_: RouteComponentProps) => (
   <div>
-    <Link to="/use-state">useState</Link>
+    <div>
+      <Link to="/use-effect">useEffect</Link>
+    </div>
+    <div>
+      <Link to="/use-state">useState</Link>
+    </div>
   </div>
 )

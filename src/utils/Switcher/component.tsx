@@ -12,17 +12,10 @@ interface Props {
 }
 
 export const Switcher = ({ switches }: Props) => {
-  const [currentViews, setSelectedViews] = useState<Switch[]>([switches[0]])
+  const [currentView, setSelectedView] = useState<Switch>(switches[0])
 
-  const viewShown = (theSwitch: Switch) =>
-    currentViews.map(view => view.name).includes(theSwitch.name)
-
-  const handleSwitchClick = (theSwitch: Switch) =>
-    setSelectedViews(prevState => {
-      if (viewShown(theSwitch))
-        return prevState.filter(shownView => shownView.name !== theSwitch.name)
-      else return [...prevState, theSwitch]
-    })
+  const viewShown = (theSwitch: Switch) => currentView === theSwitch
+  const handleSwitchClick = (theSwitch: Switch) => setSelectedView(theSwitch)
 
   return (
     <Fragment>
@@ -39,12 +32,9 @@ export const Switcher = ({ switches }: Props) => {
         ))}
       </SwitcherBar>
       <ShownViews>
-        {currentViews.map(currentView => (
-          <View className="view" key={`view-${currentView.name}`}>
-            <ViewName>{currentView.name} View</ViewName>
-            <div>{currentView.component}</div>
-          </View>
-        ))}
+        <View className="view" key={`view-${currentView.name}`}>
+          <div>{currentView.component}</div>
+        </View>
       </ShownViews>
     </Fragment>
   )
