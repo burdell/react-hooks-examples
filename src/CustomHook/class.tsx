@@ -18,7 +18,7 @@ interface State {
   chordType: ChordType
 }
 
-export class UseEffect extends Component<{}, Readonly<State>> {
+export class CustomHook extends Component<{}, Readonly<State>> {
   public state: State = {
     playing: false,
     chord: new Chord('C', 'major'),

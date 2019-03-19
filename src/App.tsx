@@ -7,6 +7,7 @@ import { Home } from './Home'
 
 import { UseStateRoute } from './UseState/route'
 import { UseEffectRoute } from './UseEffect/route'
+import { CustomHookRoute } from './CustomHook/route'
 
 export const App = () => (
   <AppStyles>
@@ -15,6 +16,7 @@ export const App = () => (
       <Home path="/" />
       <UseStateRoute path="/use-state" />
       <UseEffectRoute path="/use-effect" />
+      <CustomHookRoute path="/custom-hook" />
     </Router>
   </AppStyles>
 )
