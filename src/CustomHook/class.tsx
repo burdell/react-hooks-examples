@@ -27,20 +27,20 @@ export class CustomHook extends Component<{}, Readonly<State>> {
   }
 
   componentDidUpdate(_: {}, prevState: State) {
-    const { playing, chordBoi: chord, currentChord, chordType } = this.state
+    const { playing, chordBoi, currentChord, chordType } = this.state
 
     if (!prevState.playing && playing) {
-      chord.play()
+      chordBoi.play()
     }
     if (prevState.playing && !playing) {
-      chord.stop()
+      chordBoi.stop()
     }
     if (currentChord && prevState.currentChord !== currentChord) {
-      chord.changeChord(currentChord, this.state.chordType)
+      chordBoi.changeChord(currentChord, this.state.chordType)
     }
 
     if (chordType && prevState.chordType !== chordType) {
-      chord.changeChord(currentChord, chordType)
+      chordBoi.changeChord(currentChord, chordType)
     }
   }
 

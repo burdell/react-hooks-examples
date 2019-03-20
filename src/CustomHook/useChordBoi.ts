@@ -48,6 +48,28 @@ export function useChordBoi() {
   const [chordType, toggleType] = useToggle<ChordType>(['major', 'minor'])
   const [chordBoi, setChordBoi] = useState<ChordBoi | null>(null)
 
+  useEffect(() => {
+    window.addEventListener('keydown', downHandler)
+    setChordBoi(new ChordBoi(currentChord, chordType))
+
+    return () => {
+      window.removeEventListener('keydown', downHandler)
+      if (chordBoi) chordBoi.stop()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!chordBoi) return
+
+    if (isPlaying) chordBoi.play()
+    else chordBoi.stop()
+  }, [isPlaying])
+
+  useEffect(() => {
+    if (!chordBoi) return
+    chordBoi.changeChord(currentChord, chordType)
+  }, [currentChord, chordType])
+
   function downHandler({ which, key }: KeyboardEvent) {
     if (keyboardEvents.chords.includes(which)) {
       setCurrentChord(key.toUpperCase())
@@ -70,28 +92,6 @@ export function useChordBoi() {
       }
     }
   }
-
-  useEffect(() => {
-    if (!chordBoi) return
-
-    if (isPlaying) chordBoi.play()
-    else chordBoi.stop()
-  }, [isPlaying])
-
-  useEffect(() => {
-    if (!chordBoi) return
-    chordBoi.changeChord(currentChord, chordType)
-  }, [currentChord, chordType])
-
-  useEffect(() => {
-    window.addEventListener('keydown', downHandler)
-    setChordBoi(new ChordBoi(currentChord, chordType))
-
-    return () => {
-      window.removeEventListener('keydown', downHandler)
-      if (chordBoi) chordBoi.stop()
-    }
-  }, [])
 
   return {
     chordType,

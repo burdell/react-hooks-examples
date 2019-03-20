@@ -73,7 +73,7 @@ export class ChordBoi {
     }
   }
 
-  public createChord(baseFreq: number, type: ChordType) {
+  private createChord(baseFreq: number, type: ChordType) {
     const steps = chordSteps[type]
     return [baseFreq, ...steps.map(step => this.newFrequency(baseFreq, step))]
   }
