@@ -20,8 +20,10 @@ export const lightTheme: Theme = {
 
 export const ThemeContext = createContext<{
   currentTheme: Theme
+  toggleTheme: () => void
 }>({
-  currentTheme: lightTheme
+  currentTheme: lightTheme,
+  toggleTheme: () => null
 })
 
 const { Provider, Consumer } = ThemeContext
@@ -40,7 +42,9 @@ const ThemeProvider = ({ children }: ProviderProps) => {
   const currentTheme = currentThemeName === 'light' ? lightTheme : darkTheme
 
   return (
-    <Provider value={{ currentTheme }}>{children({ toggleTheme })}</Provider>
+    <Provider value={{ currentTheme, toggleTheme }}>
+      {children({ toggleTheme })}
+    </Provider>
   )
 }
 

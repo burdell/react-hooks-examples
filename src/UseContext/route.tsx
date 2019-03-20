@@ -12,21 +12,11 @@ export const UseContextRoute = (_: RouteComponentProps) => (
     switches={[
       {
         name: 'Salt Friends - Hook',
-        component: (
-          <ThemeProvider>
-            {({ toggleTheme }) => <SaltFriendsHook toggleTheme={toggleTheme} />}
-          </ThemeProvider>
-        )
+        component: <ThemeProvider>{() => <SaltFriendsHook />}</ThemeProvider>
       },
       {
         name: 'Salt Friends - Class',
-        component: (
-          <ThemeProvider>
-            {({ toggleTheme }) => (
-              <SaltFriendsClass toggleTheme={toggleTheme} />
-            )}
-          </ThemeProvider>
-        )
+        component: <ThemeProvider>{() => <SaltFriendsClass />}</ThemeProvider>
       }
     ]}
   />

@@ -19,11 +19,7 @@ interface State {
   filter: FilterType
 }
 
-interface Props {
-  toggleTheme(): void
-}
-
-export class UseEffect extends Component<Readonly<Props>, Readonly<State>> {
+export class UseEffect extends Component<{}, Readonly<State>> {
   readonly state: State = {
     allUsers: [],
     friends: [],
@@ -40,12 +36,10 @@ export class UseEffect extends Component<Readonly<Props>, Readonly<State>> {
   render() {
     const { friends, allUsers } = this.state
     return (
-      <div>
-        <ToggleButton onClick={this.props.toggleTheme}>
-          Toggle Theme
-        </ToggleButton>
-        <ThemeConsumer>
-          {({ currentTheme }) => (
+      <ThemeConsumer>
+        {({ currentTheme, toggleTheme }) => (
+          <div>
+            <ToggleButton onClick={toggleTheme}>Toggle Theme</ToggleButton>
             <Container theme={currentTheme}>
               <Filter onFilter={this.filter} />
               <div>
@@ -83,9 +77,9 @@ export class UseEffect extends Component<Readonly<Props>, Readonly<State>> {
                 </PersonList>
               </div>
             </Container>
-          )}
-        </ThemeConsumer>
-      </div>
+          </div>
+        )}
+      </ThemeConsumer>
     )
   }
 

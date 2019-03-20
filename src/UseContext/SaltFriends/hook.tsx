@@ -17,7 +17,7 @@ interface Props {
   toggleTheme(): void
 }
 
-export const UseEffect = ({ toggleTheme }: Props) => {
+export const UseEffect = () => {
   const [people, setPeople] = useState<{
     friends: PersonType[]
     allUsers: PersonType[]
@@ -59,7 +59,7 @@ export const UseEffect = ({ toggleTheme }: Props) => {
     getPeople()
   }
 
-  const { currentTheme } = useContext(ThemeContext)
+  const { currentTheme, toggleTheme } = useContext(ThemeContext)
   const { friends, allUsers } = people
   return (
     <Fragment>
