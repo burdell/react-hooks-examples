@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import { Option, NoteRow } from './styles'
-import { Chord, AvailableChords, ChordType } from './Chord'
+import { ChordBoi, AvailableChords, ChordType } from './ChordBoi'
 
 const keyboardEvents = {
   Space: 32,
@@ -13,21 +13,21 @@ const keyboardEvents = {
 
 interface State {
   playing: boolean
-  chord: Chord
+  chordBoi: ChordBoi
   currentChord: string
   chordType: ChordType
 }
 
-export class UseEffect extends Component<{}, Readonly<State>> {
+export class CustomHook extends Component<{}, Readonly<State>> {
   public state: State = {
     playing: false,
-    chord: new Chord('C', 'major'),
+    chordBoi: new ChordBoi('C', 'major'),
     currentChord: 'C',
     chordType: 'major'
   }
 
   componentDidUpdate(_: {}, prevState: State) {
-    const { playing, chord, currentChord, chordType } = this.state
+    const { playing, chordBoi: chord, currentChord, chordType } = this.state
 
     if (!prevState.playing && playing) {
       chord.play()
@@ -50,7 +50,7 @@ export class UseEffect extends Component<{}, Readonly<State>> {
 
   componentWillUnmount() {
     document.removeEventListener('keydown', this.handleKeyEvent)
-    this.state.chord.stop()
+    this.state.chordBoi.stop()
   }
 
   render() {

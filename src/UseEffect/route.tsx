@@ -3,14 +3,18 @@ import { RouteComponentProps } from '@reach/router'
 
 import { Switcher } from '../utils/Switcher'
 
-import { UseEffect as ClassComp } from './class'
-import { UseEffect as HookComp } from './hook'
+import { UseEffect as ClassComp } from './Battery/class'
+import { UseEffect as HookComp } from './Battery/hook'
+import { UseEffect as SaltFriendsClass } from './SaltFriends/class'
+import { UseEffect as SaltFriendsHook } from './SaltFriends/hook'
 
 export const UseEffectRoute = (_: RouteComponentProps) => (
   <Switcher
     switches={[
-      { name: 'Class', component: <ClassComp /> },
-      { name: 'Hook', component: <HookComp /> }
+      { name: 'Salt Friends - Class', component: <SaltFriendsClass /> },
+      { name: 'Salt Friends - Hook', component: <SaltFriendsHook /> },
+      { name: 'Battery - Class', component: <ClassComp /> },
+      { name: 'Battery - Hook', component: <HookComp /> }
     ]}
   />
 )

@@ -25,3 +25,8 @@ export const PersonStyles = styled('div')`
 export const SaltStyles = styled('img')`
   height: 50px;
 `
+
+export const Filter = styled('div')`
+  display: flex;
+  justify-content: space-between;
+`
