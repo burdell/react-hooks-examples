@@ -13,8 +13,8 @@ export const UseEffectRoute = (_: RouteComponentProps) => (
     switches={[
       { name: 'Battery - Hook', component: <HookComp /> },
       { name: 'Salt Friends - Hook', component: <SaltFriendsHook /> },
-      { name: 'Salt Friends - Class', component: <SaltFriendsClass /> },
-      { name: 'Battery - Class', component: <ClassComp /> }
+      { name: 'Battery - Class', component: <ClassComp /> },
+      { name: 'Salt Friends - Class', component: <SaltFriendsClass /> }
     ]}
   />
 )

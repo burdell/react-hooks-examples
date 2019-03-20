@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext, Fragment } from 'react'
 
-import { Container, PersonList } from './styles'
+import { Container, PersonList, ToggleButton } from './styles'
 import {
   getAllUsers,
   getFriends,
@@ -63,7 +63,7 @@ export const UseEffect = ({ toggleTheme }: Props) => {
   const { friends, allUsers } = people
   return (
     <Fragment>
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <ToggleButton onClick={toggleTheme}>Toggle Theme</ToggleButton>
       <Container theme={currentTheme}>
         <Filter onFilter={filterUsers} />
         <div>

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Container, PersonList } from './styles'
+import { Container, PersonList, ToggleButton } from './styles'
 import {
   getAllUsers,
   getFriends,
@@ -41,7 +41,9 @@ export class UseEffect extends Component<Readonly<Props>, Readonly<State>> {
     const { friends, allUsers } = this.state
     return (
       <div>
-        <button onClick={this.props.toggleTheme}>Toggle Theme</button>
+        <ToggleButton onClick={this.props.toggleTheme}>
+          Toggle Theme
+        </ToggleButton>
         <ThemeConsumer>
           {({ currentTheme }) => (
             <Container theme={currentTheme}>

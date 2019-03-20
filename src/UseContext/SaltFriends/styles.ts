@@ -33,3 +33,7 @@ export const Filter = styled('div')`
   display: flex;
   justify-content: space-between;
 `
+export const ToggleButton = styled('button')`
+  font-size: 1.5rem;
+  margin: 0.5rem;
+`
