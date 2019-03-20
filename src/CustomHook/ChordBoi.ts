@@ -22,7 +22,7 @@ const chordSteps = {
 
 export const AvailableChords = Object.keys(noteFreqs)
 
-export class Chord {
+export class ChordBoi {
   private freqs: number[]
   private AudioContext: any
   private oscillators: any[]

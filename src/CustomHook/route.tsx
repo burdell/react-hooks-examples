@@ -9,8 +9,8 @@ import { CustomHook as HookComp } from './hook'
 export const CustomHookRoute = (_: RouteComponentProps) => (
   <Switcher
     switches={[
-      { name: 'Class', component: <ClassComp /> },
-      { name: 'Hook', component: <HookComp /> }
+      { name: 'Hook', component: <HookComp /> },
+      { name: 'Class', component: <ClassComp /> }
     ]}
   />
 )
