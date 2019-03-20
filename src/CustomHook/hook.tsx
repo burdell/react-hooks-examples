@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
-import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles'
-import { AvailableChords } from './ChordBoi'
-import { useChordBoi } from './useChordBoi'
+import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles';
+import { AvailableChords } from './ChordBoi';
+import { useChordBoi } from './useChordBoi';
 
 export const CustomHook = () => {
   const {
@@ -12,7 +12,7 @@ export const CustomHook = () => {
     setType,
     setCurrentChord,
     togglePlaying
-  } = useChordBoi()
+  } = useChordBoi();
 
   return (
     <ChordBoiStyles>
@@ -50,5 +50,5 @@ export const CustomHook = () => {
         <div>m - toggle major & minor</div>
       </Instructions>
     </ChordBoiStyles>
-  )
-}
+  );
+};

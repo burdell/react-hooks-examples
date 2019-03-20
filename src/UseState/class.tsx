@@ -1,17 +1,17 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component, Fragment } from 'react';
 
-import { UseStateStyles, TextInput } from './styles'
+import { UseStateStyles, TextInput } from './styles';
 
 interface State {
-  text: string
-  isSelected: boolean
+  text: string;
+  isSelected: boolean;
 }
 
 export class UseState extends Component<{}, Readonly<State>> {
   public readonly state: State = {
     text: '',
     isSelected: false
-  }
+  };
 
   render() {
     return (
@@ -36,6 +36,6 @@ export class UseState extends Component<{}, Readonly<State>> {
           </div>
         </div>
       </UseStateStyles>
-    )
+    );
   }
 }

@@ -1,10 +1,10 @@
-import React from 'React'
-import { RouteComponentProps } from '@reach/router'
+import React from 'React';
+import { RouteComponentProps } from '@reach/router';
 
-import { Switcher } from '../utils/Switcher'
+import { Switcher } from '../utils/Switcher';
 
-import { UseState as ClassComp } from './class'
-import { UseState as HookComp } from './hook'
+import { UseState as ClassComp } from './class';
+import { UseState as HookComp } from './hook';
 
 export const UseStateRoute = (_: RouteComponentProps) => (
   <Switcher
@@ -13,4 +13,4 @@ export const UseStateRoute = (_: RouteComponentProps) => (
       { name: 'Class', component: <ClassComp /> }
     ]}
   />
-)
+);

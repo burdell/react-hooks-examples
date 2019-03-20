@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles'
-import { ChordBoi, AvailableChords, ChordType } from './ChordBoi'
+import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles';
+import { ChordBoi, AvailableChords, ChordType } from './ChordBoi';
 
 const keyboardEvents = {
   Space: 32,
@@ -9,13 +9,13 @@ const keyboardEvents = {
   Down: 40,
   m: 77,
   chords: [65, 66, 67, 68, 69, 70, 71]
-}
+};
 
 interface State {
-  playing: boolean
-  chordBoi: ChordBoi
-  currentChord: string
-  chordType: ChordType
+  playing: boolean;
+  chordBoi: ChordBoi;
+  currentChord: string;
+  chordType: ChordType;
 }
 
 export class CustomHook extends Component<{}, Readonly<State>> {
@@ -24,33 +24,33 @@ export class CustomHook extends Component<{}, Readonly<State>> {
     chordBoi: new ChordBoi('C', 'major'),
     currentChord: 'C',
     chordType: 'major'
-  }
+  };
 
   componentDidUpdate(_: {}, prevState: State) {
-    const { playing, chordBoi, currentChord, chordType } = this.state
+    const { playing, chordBoi, currentChord, chordType } = this.state;
 
     if (!prevState.playing && playing) {
-      chordBoi.play()
+      chordBoi.play();
     }
     if (prevState.playing && !playing) {
-      chordBoi.stop()
+      chordBoi.stop();
     }
     if (currentChord && prevState.currentChord !== currentChord) {
-      chordBoi.changeChord(currentChord, this.state.chordType)
+      chordBoi.changeChord(currentChord, this.state.chordType);
     }
 
     if (chordType && prevState.chordType !== chordType) {
-      chordBoi.changeChord(currentChord, chordType)
+      chordBoi.changeChord(currentChord, chordType);
     }
   }
 
   componentDidMount() {
-    document.addEventListener('keydown', this.handleKeyEvent)
+    document.addEventListener('keydown', this.handleKeyEvent);
   }
 
   componentWillUnmount() {
-    document.removeEventListener('keydown', this.handleKeyEvent)
-    this.state.chordBoi.stop()
+    document.removeEventListener('keydown', this.handleKeyEvent);
+    this.state.chordBoi.stop();
   }
 
   render() {
@@ -90,52 +90,52 @@ export class CustomHook extends Component<{}, Readonly<State>> {
           <div>m - toggle major & minor</div>
         </Instructions>
       </ChordBoiStyles>
-    )
+    );
   }
 
   handleKeyEvent = (event: KeyboardEvent) => {
-    const { which, key } = event
+    const { which, key } = event;
     if (keyboardEvents.chords.includes(which)) {
-      this.setCurrentChord(key.toUpperCase())
+      this.setCurrentChord(key.toUpperCase());
     } else {
       switch (which) {
         case keyboardEvents.Space:
-          this.togglePlaying()
-          return
+          this.togglePlaying();
+          return;
         case keyboardEvents.m:
-          this.toggleType()
-          return
+          this.toggleType();
+          return;
         case keyboardEvents.Down:
-          this.moveChord(-1)
-          return
+          this.moveChord(-1);
+          return;
         case keyboardEvents.Up:
-          this.moveChord(1)
-          return
+          this.moveChord(1);
+          return;
         default:
-          return
+          return;
       }
     }
-  }
+  };
 
-  setType = (chordType: ChordType) => this.setState({ chordType })
+  setType = (chordType: ChordType) => this.setState({ chordType });
 
   toggleType = () => {
     if (this.state.chordType === 'major') {
-      this.setState({ chordType: 'minor' })
+      this.setState({ chordType: 'minor' });
     } else {
-      this.setState({ chordType: 'major' })
+      this.setState({ chordType: 'major' });
     }
-  }
+  };
 
-  setCurrentChord = (chord: string) => this.setState({ currentChord: chord })
+  setCurrentChord = (chord: string) => this.setState({ currentChord: chord });
 
-  togglePlaying = () => this.setState({ playing: !this.state.playing })
+  togglePlaying = () => this.setState({ playing: !this.state.playing });
 
   moveChord = (steps: number) => {
-    const currentChordIndex = AvailableChords.indexOf(this.state.currentChord)
-    let newIndex = (currentChordIndex + steps) % AvailableChords.length
-    if (newIndex < 0) newIndex = AvailableChords.length - 1
+    const currentChordIndex = AvailableChords.indexOf(this.state.currentChord);
+    let newIndex = (currentChordIndex + steps) % AvailableChords.length;
+    if (newIndex < 0) newIndex = AvailableChords.length - 1;
 
-    this.setCurrentChord(AvailableChords[newIndex])
-  }
+    this.setCurrentChord(AvailableChords[newIndex]);
+  };
 }

@@ -1,12 +1,12 @@
-import React from 'React'
-import { RouteComponentProps } from '@reach/router'
+import React from 'React';
+import { RouteComponentProps } from '@reach/router';
 
-import { Switcher } from '../utils/Switcher'
+import { Switcher } from '../utils/Switcher';
 
-import { UseEffect as ClassComp } from './Battery/class'
-import { UseEffect as HookComp } from './Battery/hook'
-import { UseEffect as SaltFriendsClass } from './SaltFriends/class'
-import { UseEffect as SaltFriendsHook } from './SaltFriends/hook'
+import { UseEffect as ClassComp } from './Battery/class';
+import { UseEffect as HookComp } from './Battery/hook';
+import { UseEffect as SaltFriendsClass } from './SaltFriends/class';
+import { UseEffect as SaltFriendsHook } from './SaltFriends/hook';
 
 export const UseEffectRoute = (_: RouteComponentProps) => (
   <Switcher
@@ -17,4 +17,4 @@ export const UseEffectRoute = (_: RouteComponentProps) => (
       { name: 'Salt Friends - Class', component: <SaltFriendsClass /> }
     ]}
   />
-)
+);

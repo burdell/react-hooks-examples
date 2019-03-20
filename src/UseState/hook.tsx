@@ -1,10 +1,10 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
 
-import { UseStateStyles, TextInput } from './styles'
+import { UseStateStyles, TextInput } from './styles';
 
 export const UseState = () => {
-  const [text, setText] = useState('')
-  const [isSelected, setSelected] = useState(false)
+  const [text, setText] = useState('');
+  const [isSelected, setSelected] = useState(false);
 
   return (
     <UseStateStyles>
@@ -28,5 +28,5 @@ export const UseState = () => {
         </div>
       </div>
     </UseStateStyles>
-  )
-}
+  );
+};
