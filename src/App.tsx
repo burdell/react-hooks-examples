@@ -7,6 +7,8 @@ import { Home } from './Home'
 
 import { UseStateRoute } from './UseState/route'
 import { UseEffectRoute } from './UseEffect/route'
+import { UseRefRoute } from './UseRef/route'
+import { UseContextRoute } from './UseContext/route'
 
 export const App = () => (
   <AppStyles>
@@ -15,6 +17,8 @@ export const App = () => (
       <Home path="/" />
       <UseStateRoute path="/use-state" />
       <UseEffectRoute path="/use-effect" />
+      <UseRefRoute path="/use-ref" />
+      <UseContextRoute path="/use-context" />
     </Router>
   </AppStyles>
 )

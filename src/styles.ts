@@ -37,10 +37,6 @@ tr, th, td {
   input {
     height: 2rem;
     font-size: 1rem;
-
-    :focus {
-      outline: none;
-    }
   }
 `
 export const AppStyles = styled('div')`
