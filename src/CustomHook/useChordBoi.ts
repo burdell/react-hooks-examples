@@ -10,18 +10,27 @@ const keyboardEvents = {
   chords: [65, 66, 67, 68, 69, 70, 71]
 }
 
-export function useChordBoi() {
-  const [currentChord, setCurrentChord] = useState('C')
-  const [chordType, setType] = useState<ChordType>('major')
-  const [isPlaying, setPlaying] = useState(false)
-  const [chordBoi, setChordBoi] = useState<ChordBoi | null>(null)
+function useToggle<T>(toggledOptions: T[]): [T, (override?: T) => void] {
+  const [currentValue, setCurrent] = useState<T>(toggledOptions[0])
 
-  const togglePlaying = () => setPlaying(prev => !prev)
-  const toggleType = () =>
-    setType(prev => (prev === 'major' ? 'minor' : 'major'))
+  const toggleValue = (override?: T) =>
+    setCurrent(prev => {
+      if (override) return override
+
+      if (prev === toggledOptions[0]) return toggledOptions[1]
+      return toggledOptions[0]
+    })
+
+  return [currentValue, toggleValue]
+}
+
+function useChord(
+  initialChord: string
+): [string, (c: string) => void, (s: number) => void] {
+  const [currentChord, setChord] = useState(initialChord)
 
   const moveChord = function(steps: number) {
-    setCurrentChord(prev => {
+    setChord(prev => {
       const currentChordIndex = AvailableChords.indexOf(prev)
       let newIndex = (currentChordIndex + steps) % AvailableChords.length
       if (newIndex < 0) newIndex = AvailableChords.length - 1
@@ -29,6 +38,15 @@ export function useChordBoi() {
       return AvailableChords[newIndex]
     })
   }
+
+  return [currentChord, setChord, moveChord]
+}
+
+export function useChordBoi() {
+  const [currentChord, setCurrentChord, moveChord] = useChord('C')
+  const [isPlaying, togglePlaying] = useToggle<boolean>([false, true])
+  const [chordType, toggleType] = useToggle<ChordType>(['major', 'minor'])
+  const [chordBoi, setChordBoi] = useState<ChordBoi | null>(null)
 
   function downHandler({ which, key }: KeyboardEvent) {
     if (keyboardEvents.chords.includes(which)) {
@@ -79,7 +97,7 @@ export function useChordBoi() {
     chordType,
     isPlaying,
     currentChord,
-    setType,
+    setType: (chordType: ChordType) => toggleType(chordType),
     togglePlaying,
     setCurrentChord
   }

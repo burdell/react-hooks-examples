@@ -41,7 +41,9 @@ export const CustomHook = () => {
           </Option>
         ))}
       </NoteRow>
-      <button onClick={togglePlaying}>{isPlaying ? 'Stop' : 'Start'}</button>
+      <button onClick={() => togglePlaying()}>
+        {isPlaying ? 'Stop' : 'Start'}
+      </button>
       <Instructions>
         <div>SPACE - start / stop</div>
         <div>KEY UP / DOWN - change chord</div>
