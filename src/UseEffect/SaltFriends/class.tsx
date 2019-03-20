@@ -13,15 +13,15 @@ import { Person } from './ui/Person'
 import { Filter } from './ui/Filter'
 
 interface State {
-  userList: PersonType[]
-  friendList: PersonType[]
+  allUsers: PersonType[]
+  friends: PersonType[]
   filter: FilterType
 }
 
-export class UseEffect extends Component<Readonly<{}>, Readonly<State>> {
+export class UseEffect extends Component<{}, Readonly<State>> {
   readonly state: State = {
-    userList: [],
-    friendList: [],
+    allUsers: [],
+    friends: [],
     filter: {
       salt: []
     }
@@ -33,55 +33,58 @@ export class UseEffect extends Component<Readonly<{}>, Readonly<State>> {
   }
 
   render() {
+    const { friends, allUsers } = this.state
     return (
-      <Container>
-        <Filter onFilter={this.filter} />
-        <div>
-          <h3>Friends</h3>
-          <PersonList data-testid="friend-list">
-            {this.state.friendList.length
-              ? this.state.friendList.map(person => (
-                  <Person
-                    key={person.id}
-                    person={person}
-                    friendStatusText="x DE-FRIEND"
-                    changeFriendshipStatus={this.removeFriend}
-                  />
-                ))
-              : 'No friends 😢'}
-          </PersonList>
-        </div>
-        <div>
-          <h3>All Users</h3>
-          <PersonList data-testid="all-user-list">
-            {this.state.userList.length
-              ? this.state.userList.map(person => (
-                  <Person
-                    key={person.id}
-                    person={person}
-                    friendStatusText={
-                      this.isNotFriend(person) ? '+ Add as Friend' : undefined
-                    }
-                    changeFriendshipStatus={this.addFriend}
-                  />
-                ))
-              : 'No other users 😢'}
-          </PersonList>
-        </div>
-      </Container>
+      <div>
+        <Container>
+          <Filter onFilter={this.filter} />
+          <div>
+            <h3>Friends</h3>
+            <PersonList data-testid="friend-list">
+              {friends.length
+                ? friends.map(person => (
+                    <Person
+                      key={person.id}
+                      person={person}
+                      friendStatusText="x DE-FRIEND"
+                      changeFriendshipStatus={this.removeFriend}
+                    />
+                  ))
+                : 'No friends 😢'}
+            </PersonList>
+          </div>
+          <div>
+            <h3>All Users</h3>
+            <PersonList data-testid="all-user-list">
+              {allUsers.length
+                ? allUsers.map(person => (
+                    <Person
+                      key={person.id}
+                      person={person}
+                      friendStatusText={
+                        !friends.includes(person)
+                          ? '+ Add as Friend'
+                          : undefined
+                      }
+                      changeFriendshipStatus={this.addFriend}
+                    />
+                  ))
+                : 'No other users 😢'}
+            </PersonList>
+          </div>
+        </Container>
+      </div>
     )
   }
 
   getPeople = async () => {
-    const [userList, friendList] = await Promise.all([
+    const [allUsers, friends] = await Promise.all([
       getAllUsers(this.state.filter),
       getFriends(this.state.filter)
     ])
 
-    this.setState({ userList, friendList })
+    this.setState({ allUsers, friends })
   }
-
-  isNotFriend = (person: PersonType) => !this.state.friendList.includes(person)
 
   filter = async ({ salt, include }: { salt: Salt; include: boolean }) => {
     const newSalt = [...this.state.filter.salt]

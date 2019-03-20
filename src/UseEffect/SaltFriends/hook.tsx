@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext, Fragment } from 'react'
 
 import { Container, PersonList } from './styles'
 import {
@@ -13,8 +13,10 @@ import { Person } from './ui/Person'
 import { Filter } from './ui/Filter'
 
 export const UseEffect = () => {
-  const [friendList, setFriends] = useState<PersonType[]>([])
-  const [userList, setUserList] = useState<PersonType[]>([])
+  const [people, setPeople] = useState<{
+    friends: PersonType[]
+    allUsers: PersonType[]
+  }>({ friends: [], allUsers: [] })
   const [filter, setFilter] = useState<FilterType>({ salt: [] })
 
   useEffect(() => {
@@ -30,8 +32,7 @@ export const UseEffect = () => {
       getAllUsers(filter),
       getFriends(filter)
     ])
-    setUserList(allUsers)
-    setFriends(friends)
+    setPeople({ friends, allUsers })
   }
 
   const filterUsers = ({ salt, include }: { salt: Salt; include: boolean }) => {
@@ -52,16 +53,16 @@ export const UseEffect = () => {
     await apiAddFriend(person)
     getPeople()
   }
-  const isNotFriend = (person: PersonType) => !friendList.includes(person)
 
+  const { friends, allUsers } = people
   return (
     <Container>
       <Filter onFilter={filterUsers} />
       <div>
         <h3>Friends</h3>
         <PersonList data-testid="friend-list">
-          {friendList.length
-            ? friendList.map(person => (
+          {friends.length
+            ? friends.map(person => (
                 <Person
                   key={person.id}
                   person={person}
@@ -75,13 +76,13 @@ export const UseEffect = () => {
       <div>
         <h3>All Users</h3>
         <PersonList data-testid="all-user-list">
-          {userList.length
-            ? userList.map(person => (
+          {allUsers.length
+            ? allUsers.map(person => (
                 <Person
                   key={person.id}
                   person={person}
                   friendStatusText={
-                    isNotFriend(person) ? '+ Add as Friend' : undefined
+                    !friends.includes(person) ? '+ Add as Friend' : undefined
                   }
                   changeFriendshipStatus={addFriend}
                 />

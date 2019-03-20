@@ -10,6 +10,9 @@ export const Home = (_: RouteComponentProps) => (
       <Link to="/use-state">useState</Link>
     </div>
     <div>
+      <Link to="/use-context">useContext</Link>
+    </div>
+    <div>
       <Link to="/custom-hook">Custom Hook</Link>
     </div>
   </div>
