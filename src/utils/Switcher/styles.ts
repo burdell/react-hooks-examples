@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 
 export const SwitcherBar = styled('div')`
   display: flex;
-  padding: 0.3rem;
+  padding: 0.7rem;
   justify-content: center;
   background-color: #738c79;
   box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.75);
@@ -14,6 +14,7 @@ export const SwitcherBar = styled('div')`
     margin: 0 0.1rem;
     cursor: pointer;
     transition: 0.1s all ease-in-out;
+    padding: 1rem;
 
     &.selected {
       background: #ecbe13;

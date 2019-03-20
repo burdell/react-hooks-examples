@@ -9,8 +9,8 @@ import { UseState as HookComp } from './hook'
 export const UseStateRoute = (_: RouteComponentProps) => (
   <Switcher
     switches={[
-      { name: 'Basic Hook', component: <HookComp /> },
-      { name: 'Basic Class', component: <ClassComp /> }
+      { name: 'Hook', component: <HookComp /> },
+      { name: 'Class', component: <ClassComp /> }
     ]}
   />
 )

@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Option, NoteRow } from './styles'
+import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles'
 import { AvailableChords } from './ChordBoi'
 import { useChordBoi } from './useChordBoi'
 
@@ -15,7 +15,7 @@ export const CustomHook = () => {
   } = useChordBoi()
 
   return (
-    <div>
+    <ChordBoiStyles>
       <NoteRow>
         <Option
           onClick={() => setType('major')}
@@ -42,6 +42,11 @@ export const CustomHook = () => {
         ))}
       </NoteRow>
       <button onClick={togglePlaying}>{isPlaying ? 'Stop' : 'Start'}</button>
-    </div>
+      <Instructions>
+        <div>SPACE - start / stop</div>
+        <div>KEY UP / DOWN - change chord</div>
+        <div>m - toggle major & minor</div>
+      </Instructions>
+    </ChordBoiStyles>
   )
 }

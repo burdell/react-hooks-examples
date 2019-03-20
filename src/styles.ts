@@ -41,6 +41,6 @@ tr, th, td {
 `
 export const AppStyles = styled('div')`
   width: 100%;
-  margin: 0 auto;
+  margin: auto;
   text-align: center;
 `

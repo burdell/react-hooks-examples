@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { Option, NoteRow } from './styles'
+import { Option, NoteRow, ChordBoiStyles, Instructions } from './styles'
 import { ChordBoi, AvailableChords, ChordType } from './ChordBoi'
 
 const keyboardEvents = {
@@ -55,7 +55,7 @@ export class CustomHook extends Component<{}, Readonly<State>> {
 
   render() {
     return (
-      <div>
+      <ChordBoiStyles>
         <NoteRow>
           <Option
             onClick={() => this.setType('major')}
@@ -84,7 +84,12 @@ export class CustomHook extends Component<{}, Readonly<State>> {
         <button onClick={() => this.togglePlaying()}>
           {this.state.playing ? 'Stop' : 'Start'}
         </button>
-      </div>
+        <Instructions>
+          <div>SPACE - start / stop</div>
+          <div>KEY UP / DOWN - change chord</div>
+          <div>m - toggle major & minor</div>
+        </Instructions>
+      </ChordBoiStyles>
     )
   }
 

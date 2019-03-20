@@ -1,5 +1,7 @@
 import React, { Component, Fragment } from 'react'
 
+import { UseStateStyles, TextInput } from './styles'
+
 interface State {
   text: string
   isSelected: boolean
@@ -13,9 +15,9 @@ export class UseState extends Component<{}, Readonly<State>> {
 
   render() {
     return (
-      <Fragment>
+      <UseStateStyles>
         <div>
-          <input
+          <TextInput
             onChange={e => this.setState({ text: e.target.value })}
             placeholder="Enter some text"
           />
@@ -26,13 +28,14 @@ export class UseState extends Component<{}, Readonly<State>> {
             onChange={e => this.setState({ isSelected: e.target.checked })}
           />
         </div>
+
         <div>
           <div>{this.state.text || 'No text entered'}</div>
           <div data-testid="checked-indicator">
             Checked: {this.state.isSelected ? 'Yes' : 'No'}
           </div>
         </div>
-      </Fragment>
+      </UseStateStyles>
     )
   }
 }

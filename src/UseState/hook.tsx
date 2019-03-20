@@ -1,13 +1,15 @@
-import React, { useState, Fragment } from 'react'
+import React, { useState } from 'react'
+
+import { UseStateStyles, TextInput } from './styles'
 
 export const UseState = () => {
   const [text, setText] = useState('')
   const [isSelected, setSelected] = useState(false)
 
   return (
-    <Fragment>
+    <UseStateStyles>
       <div>
-        <input
+        <TextInput
           onChange={e => setText(e.target.value)}
           placeholder="Enter some text"
         />
@@ -18,12 +20,13 @@ export const UseState = () => {
           onChange={e => setSelected(e.target.checked)}
         />
       </div>
+
       <div>
         <div>{text || 'No text entered'}</div>
         <div data-testid="checked-indicator">
           Checked: {isSelected ? 'Yes' : 'No'}
         </div>
       </div>
-    </Fragment>
+    </UseStateStyles>
   )
 }
