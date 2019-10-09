@@ -9,6 +9,8 @@ import { UseStateRoute } from './UseState/route'
 import { UseEffectRoute } from './UseEffect/route'
 import { UseContextRoute } from './UseContext/route'
 import { PaginationRoute } from './Pagination/route'
+import { CustomHookRoute } from './CustomHook/route'
+import { UseRefRoute } from './UseRef/route'
 
 export const App = () => (
   <AppStyles>
@@ -17,8 +19,10 @@ export const App = () => (
       <Home path="/" />
       <UseStateRoute path="/use-state" />
       <UseEffectRoute path="/use-effect" />
-      <PaginationRoute path="/pagination" />
       <UseContextRoute path="/use-context" />
+      <UseRefRoute path="/use-ref" />
+      <PaginationRoute path="/pagination" />
+      <CustomHookRoute path="/chordboi" />
     </Router>
   </AppStyles>
 )
