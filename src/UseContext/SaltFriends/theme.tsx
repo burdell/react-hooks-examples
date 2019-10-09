@@ -1,10 +1,6 @@
-import React, { createContext, useState, Fragment, ReactNode } from 'react'
+import React, { createContext, useState } from 'react'
 
-export interface Theme {
-  background: string
-  secondary: string
-  accent: string
-}
+import { Theme, ThemeContextType, ProviderProps } from './types'
 
 export const darkTheme: Theme = {
   background: '#300030',
@@ -18,19 +14,12 @@ export const lightTheme: Theme = {
   accent: '#FFC6A5'
 }
 
-export const ThemeContext = createContext<{
-  currentTheme: Theme
-  toggleTheme: () => void
-}>({
+export const ThemeContext = createContext<ThemeContextType>({
   currentTheme: lightTheme,
   toggleTheme: () => null
 })
 
 const { Provider, Consumer } = ThemeContext
-
-interface ProviderProps {
-  children({ toggleTheme }: { toggleTheme(): void }): ReactNode
-}
 
 const ThemeProvider = ({ children }: ProviderProps) => {
   const [currentThemeName, setTheme] = useState<'light' | 'dark'>('light')
@@ -41,11 +30,7 @@ const ThemeProvider = ({ children }: ProviderProps) => {
   }
   const currentTheme = currentThemeName === 'light' ? lightTheme : darkTheme
 
-  return (
-    <Provider value={{ currentTheme, toggleTheme }}>
-      {children({ toggleTheme })}
-    </Provider>
-  )
+  return <Provider value={{ currentTheme, toggleTheme }}>{children}</Provider>
 }
 
 export { ThemeProvider, Consumer as ThemeConsumer }

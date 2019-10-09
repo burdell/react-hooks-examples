@@ -19,7 +19,7 @@ interface State {
 }
 
 export class UseEffect extends Component<{}, Readonly<State>> {
-  readonly state: State = {
+  state: State = {
     allUsers: [],
     friends: [],
     filter: {

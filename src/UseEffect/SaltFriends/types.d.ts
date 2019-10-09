@@ -10,3 +10,8 @@ export interface Person {
 export interface Filter {
   salt: Salt[]
 }
+
+export interface PersonState {
+  friends: Person[]
+  allUsers: Person[]
+}

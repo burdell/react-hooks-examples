@@ -11,9 +11,9 @@ import { UseEffect as SaltFriendsHook } from './SaltFriends/hook'
 export const UseEffectRoute = (_: RouteComponentProps) => (
   <Switcher
     switches={[
-      { name: 'Battery - Hook', component: <HookComp /> },
+      // { name: 'Battery - Hook', component: <HookComp /> },
       { name: 'Salt Friends - Hook', component: <SaltFriendsHook /> },
-      { name: 'Battery - Class', component: <ClassComp /> },
+      // { name: 'Battery - Class', component: <ClassComp /> },
       { name: 'Salt Friends - Class', component: <SaltFriendsClass /> }
     ]}
   />

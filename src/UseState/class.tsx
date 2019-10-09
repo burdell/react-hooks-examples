@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from 'react'
+import React, { Component } from 'react'
 
 import { UseStateStyles, TextInput } from './styles'
 
@@ -8,7 +8,7 @@ interface State {
 }
 
 export class UseState extends Component<{}, Readonly<State>> {
-  public readonly state: State = {
+  state: State = {
     text: '',
     isSelected: false
   }

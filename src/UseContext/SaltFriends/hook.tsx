@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, Fragment } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 
 import { Container, PersonList, ToggleButton } from './styles'
 import {
@@ -12,10 +12,6 @@ import { Person as PersonType, Salt, Filter as FilterType } from './types'
 import { Person } from './ui/Person.hook'
 import { Filter } from './ui/Filter'
 import { ThemeContext } from './theme'
-
-interface Props {
-  toggleTheme(): void
-}
 
 export const UseEffect = () => {
   const [people, setPeople] = useState<{
@@ -62,7 +58,7 @@ export const UseEffect = () => {
   const { currentTheme, toggleTheme } = useContext(ThemeContext)
   const { friends, allUsers } = people
   return (
-    <Fragment>
+    <>
       <ToggleButton onClick={toggleTheme}>Toggle Theme</ToggleButton>
       <Container theme={currentTheme}>
         <Filter onFilter={filterUsers} />
@@ -99,6 +95,6 @@ export const UseEffect = () => {
           </PersonList>
         </div>
       </Container>
-    </Fragment>
+    </>
   )
 }

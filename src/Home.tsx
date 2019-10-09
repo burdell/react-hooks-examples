@@ -22,7 +22,6 @@ export const Home = (_: RouteComponentProps) => (
     <Link to="/use-state">useState</Link>
     <Link to="/use-effect">useEffect</Link>
     <Link to="/use-context">useContext</Link>
-    <Link to="/use-ref">useRef</Link>
-    <Link to="/custom-hook">Custom Hook</Link>
+    <Link to="/pagination">Pagination</Link>
   </HomeStyles>
 )

@@ -8,19 +8,25 @@ import {
   removeFriend as apiRemoveFriend,
   resetApi
 } from './api'
-import { Person as PersonType, Salt, Filter as FilterType } from './types'
+import {
+  Person as PersonType,
+  Salt,
+  Filter as FilterType,
+  PersonState
+} from './types'
 import { Person } from './ui/Person'
 import { Filter } from './ui/Filter'
 
 export const UseEffect = () => {
-  const [people, setPeople] = useState<{
-    friends: PersonType[]
-    allUsers: PersonType[]
-  }>({ friends: [], allUsers: [] })
+  const [people, setPeople] = useState<PersonState>({
+    friends: [],
+    allUsers: []
+  })
   const [filter, setFilter] = useState<FilterType>({ salt: [] })
 
   useEffect(() => {
     resetApi()
+    getPeople()
   }, [])
 
   useEffect(() => {

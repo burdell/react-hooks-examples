@@ -9,16 +9,15 @@ import { Battery } from './Battery'
 import { UseEffectStyles } from './styles'
 
 export class UseEffect extends Component<{}, Readonly<State>> {
-  public state: State = {
+  state: State = {
     level: 0,
     charging: false
   }
-  private battery: any
+  battery: any
 
   async componentDidMount() {
     const _window = window as any
-    const bat = await _window.navigator.getBattery()
-    this.battery = bat
+    this.battery = await _window.navigator.getBattery()
 
     this.battery.addEventListener('levelchange', this.handleChange)
     this.battery.addEventListener('chargingchange', this.handleChange)
@@ -31,8 +30,8 @@ export class UseEffect extends Component<{}, Readonly<State>> {
     this.battery.removeEventListener('chargingchange', this.handleChange)
   }
 
-  componentDidUpdate(_: {}, prevState: State) {
-    if (prevState.charging !== this.state.charging) {
+  componentDidUpdate(currentState: State, prevState: State) {
+    if (prevState.level !== currentState.level) {
       this.setTitle()
     }
   }
