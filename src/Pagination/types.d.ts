@@ -13,9 +13,8 @@ export interface Meta {
 }
 
 export interface PaginationState<T> {
-  data: T[]
-  rawData: T[]
-  meta: Meta
+  page: number
+  limit: number
 }
 
 export interface ReducerAction<T> {

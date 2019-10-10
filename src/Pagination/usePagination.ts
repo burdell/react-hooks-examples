@@ -31,53 +31,42 @@ function reducer<T>(
   state: PaginationState<T>,
   action: ReducerAction<T>
 ): PaginationState<T> {
-  const { type } = action
-  let { rawData } = state
-  let { page } = state.meta
+  const { type, payload } = action
+
+  let { page } = state
 
   if (type === NEXT) {
-    page = state.meta.page + 1
+    page = state.page + 1
   }
 
   if (type === PREV) {
     page = page - 1 < 1 ? 0 : page - 1
   }
 
-  if (type === SET && action.payload) {
-    const payload = action.payload
-    if (action.payload.page !== undefined) page = payload.page || 0
-    if (payload.data) rawData = payload.data
+  if (type === SET) {
+    // eslint-disable-next-line prefer-destructuring
+    if (payload && payload.page !== undefined) page = payload.page
   }
 
-  const { data, meta } = paginate({ rawData, page, limit: state.meta.limit })
-  return {
-    data,
-    meta,
-    rawData
-  }
+  return { page, limit: state.limit }
 }
 
 const DEFAULT_LIMIT = 10
 export function usePagination<T>(rawData: T[], limit = DEFAULT_LIMIT) {
   const [state, dispatch] = useReducer(reducer, {
-    rawData,
-    data: [],
-    meta: {
-      totalResultCount: 0,
-      totalPages: 0,
-      hasMore: false,
-      limit,
-      page: 0
-    }
+    page: 0,
+    limit
   })
 
-  useEffect(() => {
-    dispatch({ type: SET, payload: { data: rawData } })
-  }, [rawData])
+  const { data, meta } = paginate({
+    rawData,
+    page: state.page,
+    limit: state.limit
+  })
 
   return {
-    data: state.data,
-    meta: state.meta,
+    data,
+    meta,
     next: () => dispatch({ type: NEXT }),
     prev: () => dispatch({ type: PREV }),
     set: (payload: any) => dispatch({ type: SET, payload })
